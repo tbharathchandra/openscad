@@ -27,7 +27,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>5</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page3DView">
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -135,9 +135,9 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
-             <width>512</width>
-             <height>793</height>
+             <y>-377</y>
+             <width>602</width>
+             <height>795</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -179,7 +179,7 @@
                  <widget class="QFontComboBox" name="fontChooser">
                   <property name="currentFont">
                    <font>
-                    <family>Lucida Grande</family>
+                    <family>DejaVu Sans</family>
                     <pointsize>12</pointsize>
                    </font>
                   </property>
@@ -672,6 +672,20 @@
                <string>Autocomplete</string>
               </property>
               <layout class="QGridLayout" name="gridLayout1">
+               <item row="1" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_30">
+                 <item>
+                  <widget class="QLabel" name="labelCharacterThreshold">
+                   <property name="text">
+                    <string>Character Threshold</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEditCharacterThreshold"/>
+                 </item>
+                </layout>
+               </item>
                <item row="0" column="0">
                 <widget class="QCheckBox" name="checkBoxEnableAutocomplete">
                  <property name="text">
@@ -679,19 +693,12 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_30">
-                  <item>
-                    <widget class="QLabel" name="labelCharacterThreshold">
-                     <property name="text">
-                      <string>Character Threshold</string>
-                     </property>
-                    </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="lineEditCharacterThreshold" />
-                 </item>
-                </layout>
+               <item row="2" column="0">
+                <widget class="QCheckBox" name="checkBoxEnableAutoBraceInsertion">
+                 <property name="text">
+                  <string>Enable Brace Insertion</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -1509,7 +1516,7 @@
              <x>0</x>
              <y>0</y>
              <width>602</width>
-             <height>891</height>
+             <height>747</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_12">

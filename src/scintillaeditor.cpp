@@ -187,6 +187,8 @@ ScintillaEditor::ScintillaEditor(QWidget *parent) : EditorInterface(parent)
 	qsci->indicatorDefine(QsciScintilla::ThinCompositionIndicator, hyperlinkIndicatorNumber);
 	qsci->setIndicatorHoverStyle(QsciScintilla::DotBoxIndicator, hyperlinkIndicatorNumber);
 	connect(qsci, SIGNAL(indicatorClicked(int, int, Qt::KeyboardModifiers)), this, SLOT(onIndicatorClicked(int, int, Qt::KeyboardModifiers)));
+
+    connect(qsci, SIGNAL(textChanged()), this,SLOT(autoBrace()));
 }
 
 QPoint ScintillaEditor::mapToGlobal(const QPoint &pos)
@@ -1207,4 +1209,29 @@ void ScintillaEditor::prevBookmark()
 void ScintillaEditor::jumpToNextError()
 {
 	findMarker(1, 0, [this](int line){ return qsci->markerFindNext(line, 1 << errMarkerNumber); });
+}
+
+void ScintillaEditor::autoBrace()
+{
+    if(Preferences::inst()->getValue("editor/enableAutoBraceInsertion").toBool()){
+        int line, index;
+        qsci->getCursorPosition(&line, &index);
+        qDebug("%d",index);
+        qsci->setSelection(line,index-1,line,index);
+        QString last = qsci->selectedText();
+        qsci->setCursorPosition(line,index);
+        QString braces = "[({<";
+        if(braces.contains(last)){
+            if(last=="{"){
+                qDebug("good");
+                qsci->append(QString("}"));
+            }else if(last=="["){
+                qsci->insertAt("]",line,index+1);
+            }else if(last=="("){
+                qsci->insertAt(")",line,index+1);
+            }else if(last=="<"){
+                qsci->insertAt(">",line,index+1);
+            }
+        }
+    }
 }

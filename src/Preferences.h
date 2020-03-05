@@ -122,6 +122,9 @@ signals:
 	void autocompleteChanged(bool status) const;
 	void characterThresholdChanged(int val) const;
 
+private slots:
+    void on_checkBoxEnableAutoBraceInsertion_toggled(bool checked);
+
 private:
     Preferences(QWidget *parent = nullptr);
 	void keyPressEvent(QKeyEvent *e) override;

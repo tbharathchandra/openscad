@@ -168,6 +168,7 @@ void Preferences::init() {
 	this->defaultmap["advanced/enableParameterRangeCheck"] = false;
 
 	this->defaultmap["editor/enableAutocomplete"] = true;
+    this->defaultmap["editor/enableAutoBraceInsertion"] = true;
 	this->defaultmap["editor/characterThreshold"] = 1;
 
 	// Toolbar
@@ -905,6 +906,7 @@ void Preferences::updateGUI()
 	BlockSignals<QCheckBox *>(this->enableRangeCheckBox)->setChecked(getValue("advanced/enableParameterRangeCheck").toBool());
 	BlockSignals<QCheckBox *>(this->enableHidapiTraceCheckBox)->setChecked(s->get(Settings::Settings::inputEnableDriverHIDAPILog));
 	BlockSignals<QCheckBox *>(this->checkBoxEnableAutocomplete)->setChecked(getValue("editor/enableAutocomplete").toBool());
+    BlockSignals<QCheckBox *>(this->checkBoxEnableAutoBraceInsertion)->setChecked(getValue("editor/enableAutoBraceInsertion").toBool());
 	BlockSignals<QLineEdit *>(this->lineEditCharacterThreshold)->setText(getValue("editor/characterThreshold").toString());
 
 	this->secLabel->setEnabled(getValue("advanced/enableSoundNotification").toBool());
@@ -1030,4 +1032,10 @@ Preferences *Preferences::inst() {
     assert(instance != nullptr);
     
     return instance;
+}
+
+void Preferences::on_checkBoxEnableAutoBraceInsertion_toggled(bool checked)
+{
+    QSettingsCached settings;
+    settings.setValue("editor/enableAutoBraceInsertion", checked);
 }

@@ -1216,15 +1216,14 @@ void ScintillaEditor::autoBrace()
     if(Preferences::inst()->getValue("editor/enableAutoBraceInsertion").toBool()){
         int line, index;
         qsci->getCursorPosition(&line, &index);
-        qDebug("%d",index);
-        qsci->setSelection(line,index-1,line,index);
+        //qDebug("line-%d index-%d",line,index);
+        qsci->setSelection(line,index,line,index+1);
         QString last = qsci->selectedText();
-        qsci->setCursorPosition(line,index);
         QString braces = "[({<";
         if(braces.contains(last)){
             if(last=="{"){
-                qDebug("good");
-                qsci->append(QString("}"));
+                //qDebug("%s",last.toStdString().c_str());
+                qsci->insertAt("}",line,index+1);
             }else if(last=="["){
                 qsci->insertAt("]",line,index+1);
             }else if(last=="("){
@@ -1233,5 +1232,6 @@ void ScintillaEditor::autoBrace()
                 qsci->insertAt(">",line,index+1);
             }
         }
+        qsci->setCursorPosition(line,index);
     }
 }
